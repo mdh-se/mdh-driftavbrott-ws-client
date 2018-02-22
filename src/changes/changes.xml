@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<document xmlns="http://maven.apache.org/changes/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
+  <properties>
+    <title>Ändringar</title>
+  </properties>
+  <body>
+    <release version="2.1.0" date="2018-MM-DD">
+      <action>Uppdatera till CXF 3.1.14.</action>
+      <action>Uppdatera beroende till mdh-driftavbrott-modell:1.2.0.</action>
+      <action>Uppgradera till mdh-jparent:26.</action>
+      <action>För att köra integrationstesterna krävs att man anger URL till en driftavbrottstjänst.</action>
+      <action>Propertyn för URL till driftavbrottstjänsten har bytt namn till se.mdh.driftavbrott.service.url.</action>
+    </release>
+    <release version="2.0.0" date="2017-10-03">
+      <action>Uppgradera till JAX-RS 2.0 och CXF 3.1.</action>
+    </release>
+    <release version="1.0.1" date="2017-10-02">
+      <action>Lägg till ytterligare felhantering.</action>
+    </release>
+    <release version="1.0.0" date="2017-09-28">
+      <action>Lägg till en facade för att hämta driftavbrott.</action>
+    </release>
+  </body>
+</document>

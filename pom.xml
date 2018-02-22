@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>se.mdh</groupId>
+    <artifactId>mdh-parent</artifactId>
+    <version>26</version>
+    <relativePath>../mdh-parent/pom.xml</relativePath>
+  </parent>
+
+  <groupId>se.mdh.driftavbrott</groupId>
+  <artifactId>mdh-driftavbrott-ws-client</artifactId>
+  <version>2.1.0-SNAPSHOT</version>
+
+  <name>${project.groupId}:${project.artifactId}</name>
+  <description>En klient som pratar med driftavbrottstjänstens web service.</description>
+  <url>https://github.com/mdh-se/${project.artifactId}</url>
+
+  <scm>
+    <connection>scm:git:https://github.com/mdh-se/${project.artifactId}.git</connection>
+    <developerConnection>scm:git:https://github.com/mdh-se/${project.artifactId}.git</developerConnection>
+    <url>https://github.com/mdh-se/${project.artifactId}</url>
+  </scm>
+
+  <properties>
+    <mdh.driftavbrott.service.url>${mdh.driftavbrott.service.base.url}:3301/mdh-driftavbrott/v1</mdh.driftavbrott.service.url>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>2.5</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging</artifactId>
+      <version>1.2</version>
+    </dependency>
+    <dependency>
+      <groupId>javax.ws.rs</groupId>
+      <artifactId>javax.ws.rs-api</artifactId>
+      <version>2.0</version>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.12</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.cxf</groupId>
+      <artifactId>cxf-rt-rs-client</artifactId>
+      <version>${mdh.cxf.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>se.mdh.driftavbrott</groupId>
+      <artifactId>mdh-driftavbrott-modell</artifactId>
+      <version>1.2.0-SNAPSHOT</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <testResources>
+      <testResource>
+        <directory>src/test/resources</directory>
+        <filtering>true</filtering>
+      </testResource>
+    </testResources>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-release-plugin</artifactId>
+          <configuration>
+            <releaseProfiles>changes,mdh-release</releaseProfiles>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+
+  <profiles>
+    <profile>
+      <!--
+        Dessa tester ligger i en profil som måste aktiveras manuellt, eftersom
+        de kopplar upp sig mot web services, som inte alltid går att nå. För att
+        köra dessa integrationstester måste du också ange propertyn
+        mdh.driftavbrott.service.base.url som skall peka ut den bas-URL där
+        driftavbrottstjänsten är installerad, till exempel:
+        -Prun-its -Dmdh.driftavbrott.service.base.url=http://localhost
+      -->
+      <id>run-its</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-failsafe-plugin</artifactId>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>integration-test</goal>
+                  <goal>verify</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+</project>
