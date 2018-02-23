@@ -23,3 +23,13 @@ Här följer ett exempel på lite Java-kod:
       // Felhantering
     }
 ```
+
+## Konfigurering
+
+Klassen `DriftavbrottFacade` behöver konfigurationsfilen
+`se.mdh.driftavbrott.properties` som ska innehålla en URL till
+mdh-driftavbrott-service. Till exempel så här:
+
+```
+se.mdh.driftavbrott.service.url=http://localhost:3301/mdh-driftavbrott/v1
+```
