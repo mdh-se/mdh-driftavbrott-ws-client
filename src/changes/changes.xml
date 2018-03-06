@@ -4,10 +4,10 @@
     <title>Ändringar</title>
   </properties>
   <body>
-    <release version="2.1.0" date="2018-MM-DD">
+    <release version="2.1.0" date="2018-03-06">
       <action>Uppdatera till CXF 3.1.14.</action>
       <action>Uppdatera beroende till mdh-driftavbrott-modell:1.2.0.</action>
-      <action>Uppgradera till mdh-jparent:26.</action>
+      <action>Uppgradera till mdh-parent:26.</action>
       <action>För att köra integrationstesterna krävs att man anger URL till en driftavbrottstjänst.</action>
       <action>Propertyn för URL till driftavbrottstjänsten har bytt namn till se.mdh.driftavbrott.service.url.</action>
     </release>
