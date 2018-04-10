@@ -1,16 +1,13 @@
 package se.mdh.driftavbrott.client;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.net.URL;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Properties;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.xml.ws.WebServiceException;
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -36,13 +33,12 @@ public class DriftavbrottFacade {
    * Skapa en ny instans.
    */
   public DriftavbrottFacade() throws IOException {
-    FileInputStream inputStream = null;
+    InputStream inputStream = null;
     try {
-      URL resource = getClass().getClassLoader().getResource(PROPERTIES_FILE);
-      if(resource == null) {
+      inputStream = getClass().getClassLoader().getResourceAsStream(PROPERTIES_FILE);
+      if(inputStream == null) {
         throw new IOException("Hittade inte properties-filen '" + PROPERTIES_FILE + "' på classpath.");
       }
-      inputStream = FileUtils.openInputStream(new File(resource.getFile()));
       properties = new Properties();
       properties.load(inputStream);
     }

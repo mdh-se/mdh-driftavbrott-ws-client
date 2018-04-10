@@ -4,6 +4,9 @@
     <title>Ändringar</title>
   </properties>
   <body>
+    <release version="2.1.1" date="2018-04-10">
+      <action>Säkerställ att properties-filen kan läsas även i en webapp på Windows.</action>
+    </release>
     <release version="2.1.0" date="2018-03-06">
       <action>Uppdatera till CXF 3.1.14.</action>
       <action>Uppdatera beroende till mdh-driftavbrott-modell:1.2.0.</action>
