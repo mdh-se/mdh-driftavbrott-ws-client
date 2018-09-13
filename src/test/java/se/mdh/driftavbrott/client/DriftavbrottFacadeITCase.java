@@ -23,15 +23,18 @@ public class DriftavbrottFacadeITCase {
    */
   private static final Log log = LogFactory.getLog(DriftavbrottFacadeITCase.class);
   private static final String KANAL_ALLTID = "alltid";
+  private static final String KANAL_ALDRIG = "aldrig";
   private static final String KANAL_SAKNAS = "kanalen.som.inte.finns";
 
   private static List<String> kanalerFinns = new ArrayList<>();
   private static List<String> kanalerSaknas = new ArrayList<>();
+  private static List<String> kanalerFinnsMenHarEjPågåendeAvbrott = new ArrayList<>();
 
   @BeforeClass
   public static void beforeClass() {
     kanalerFinns.add(KANAL_ALLTID);
     kanalerSaknas.add(KANAL_SAKNAS);
+    kanalerFinnsMenHarEjPågåendeAvbrott.add(KANAL_ALDRIG);
   }
 
   @Test
@@ -51,6 +54,17 @@ public class DriftavbrottFacadeITCase {
   public void testGetPagaendeKanalSaknas() throws Exception {
     DriftavbrottFacade facade = new DriftavbrottFacade();
     Driftavbrott driftavbrott = facade.getPagaendeDriftavbrott(kanalerSaknas, "Integrationstest");
+    log.info(driftavbrott);
+    assertNull(driftavbrott);
+  }
+
+  /**
+   * Testa korrekt nullhantering för en kanal som inte har ett pågående avbrott.
+   */
+  @Test
+  public void testGetKanalHarEjPagaendeAvbrott() throws Exception {
+    DriftavbrottFacade facade = new DriftavbrottFacade();
+    Driftavbrott driftavbrott = facade.getPagaendeDriftavbrott(kanalerFinnsMenHarEjPågåendeAvbrott, "Integrationstest");
     log.info(driftavbrott);
     assertNull(driftavbrott);
   }
