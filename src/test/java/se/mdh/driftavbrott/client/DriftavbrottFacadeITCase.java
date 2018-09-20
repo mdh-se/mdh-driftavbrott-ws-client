@@ -68,4 +68,36 @@ public class DriftavbrottFacadeITCase {
     log.info(driftavbrott);
     assertNull(driftavbrott);
   }
+
+  @Test
+  public void testGetPagaendeMedMarginal() throws Exception {
+    DriftavbrottFacade facade = new DriftavbrottFacade();
+    Driftavbrott driftavbrott = facade.getPagaendeDriftavbrott(kanalerFinns, "Integrationstest", 15);
+    log.info(driftavbrott);
+    assertNotNull(driftavbrott);
+
+    System.out.println(driftavbrott);
+  }
+
+  /**
+   * Testa korrekt nullhantering för en ickeexisterande kanal.
+   */
+  @Test
+  public void testGetPagaendeKanalSaknasMedMarginal() throws Exception {
+    DriftavbrottFacade facade = new DriftavbrottFacade();
+    Driftavbrott driftavbrott = facade.getPagaendeDriftavbrott(kanalerSaknas, "Integrationstest", 15);
+    log.info(driftavbrott);
+    assertNull(driftavbrott);
+  }
+
+  /**
+   * Testa korrekt nullhantering för en kanal som inte har ett pågående avbrott.
+   */
+  @Test
+  public void testGetKanalHarEjPagaendeAvbrottMedMarginal() throws Exception {
+    DriftavbrottFacade facade = new DriftavbrottFacade();
+    Driftavbrott driftavbrott = facade.getPagaendeDriftavbrott(kanalerFinnsMenHarEjPågåendeAvbrott, "Integrationstest", 15);
+    log.info(driftavbrott);
+    assertNull(driftavbrott);
+  }
 }

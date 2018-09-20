@@ -58,12 +58,29 @@ public class DriftavbrottFacade {
   public Driftavbrott getPagaendeDriftavbrott(final List<String> kanaler,
                                               final String system)
       throws WebServiceException {
+    return getPagaendeDriftavbrott(kanaler, system, 0);
+  }
+
+  /**
+   * Hämta ett pågående driftavbrott för en samling med kanaler.
+   *
+   * @param kanaler De kanaler som du är intresserad av
+   * @param system Det system som frågar om driftavbrott, dvs ditt system
+   * @param marginal Marginaler för driftavbrottet i minuter
+   * @return Ett pågående driftavbrott
+   * @throws WebServiceException Om något går fel i kommunikationen med web servicen
+   */
+  public Driftavbrott getPagaendeDriftavbrott(final List<String> kanaler,
+                                              final String system,
+                                              final int marginal)
+      throws WebServiceException {
     String url = "";
     try {
       WebClient client = WebClient.create(properties.getProperty("se.mdh.driftavbrott.service.url"))
           .path("/driftavbrott/pagaende")
           .query("kanal", kanaler.toArray())
-          .query("system", system);
+          .query("system", system)
+          .query("marginal", marginal);
       client.accept(MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON);
 
       url = client.getCurrentURI().toString();
