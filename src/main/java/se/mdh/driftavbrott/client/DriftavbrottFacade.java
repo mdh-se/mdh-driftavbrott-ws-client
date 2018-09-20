@@ -58,27 +58,24 @@ public class DriftavbrottFacade {
   public Driftavbrott getPagaendeDriftavbrott(final List<String> kanaler,
                                               final String system)
       throws WebServiceException {
+    String url = "";
     try {
       WebClient client = WebClient.create(properties.getProperty("se.mdh.driftavbrott.service.url"))
           .path("/driftavbrott/pagaende")
           .query("kanal", kanaler.toArray())
           .query("system", system);
-      client.accept(MediaType.APPLICATION_XML);
+      client.accept(MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON);
+
+      url = client.getCurrentURI().toString();
+
       log.debug("Ska hämta driftavbrott från: "
-                    + client.getCurrentURI().toString());
+                    + url);
       return client.get(Driftavbrott.class);
     }
     catch(WebApplicationException wae) {
-      // Hantera standard JAX-RS exception
-      if(wae.getResponse().getStatus() == Response.Status.NOT_FOUND.getStatusCode()) {
-        log.info("Det finns inga driftavbrott för någon av kanalerna " + kanaler + ".");
-        return null;
-      }
-      else {
-        String message = "Det gick inte att hämta driftavbrott för kanalerna " + kanaler + " (JAX-RS).";
+        String message = "Det gick inte att hämta driftavbrott för kanalerna " + kanaler + " (url = " + url + ").";
         log.error(message, wae);
         throw new WebServiceException("", wae);
-      }
     }
     catch(Throwable t) {
       // Hantera okänt fel
