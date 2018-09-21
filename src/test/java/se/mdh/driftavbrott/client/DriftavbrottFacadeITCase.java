@@ -43,8 +43,6 @@ public class DriftavbrottFacadeITCase {
     Driftavbrott driftavbrott = facade.getPagaendeDriftavbrott(kanalerFinns, "Integrationstest");
     log.info(driftavbrott);
     assertNotNull(driftavbrott);
-
-    System.out.println(driftavbrott);
   }
 
   /**
@@ -75,8 +73,6 @@ public class DriftavbrottFacadeITCase {
     Driftavbrott driftavbrott = facade.getPagaendeDriftavbrott(kanalerFinns, "Integrationstest", 15);
     log.info(driftavbrott);
     assertNotNull(driftavbrott);
-
-    System.out.println(driftavbrott);
   }
 
   /**
