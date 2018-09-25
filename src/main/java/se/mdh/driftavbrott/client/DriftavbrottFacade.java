@@ -81,7 +81,9 @@ public class DriftavbrottFacade {
           .query("kanal", kanaler.toArray())
           .query("system", system)
           .query("marginal", marginal);
-      client.accept(MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON);
+
+//    Måste acceptera json och text/html för fel som inte tjänsten klarar av att returnera i xml-format, t.ex. 400 (text/html) och 404 (json).
+      client.accept(MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON, MediaType.TEXT_HTML);
 
       url = client.getCurrentURI().toString();
 
@@ -90,7 +92,7 @@ public class DriftavbrottFacade {
       return client.get(Driftavbrott.class);
     }
     catch(WebApplicationException wae) {
-        String message = "Det gick inte att hämta driftavbrott för kanalerna " + kanaler + " (url = " + url + ").";
+        String message = "Det gick inte att hämta driftavbrott för kanalerna " + kanaler + " (url = " + url + "). Statuskod " + wae.getResponse().getStatus();
         log.error(message, wae);
         throw new WebServiceException("", wae);
     }
