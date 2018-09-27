@@ -91,9 +91,9 @@ public class DriftavbrottFacade {
       return client.get(Driftavbrott.class);
     }
     catch(WebApplicationException wae) {
-        String message = "Det gick inte att hämta driftavbrott för kanalerna " + kanaler + " (url = " + url + "). Statuskod " + wae.getResponse().getStatus();
-        log.error(message, wae);
-        throw new WebServiceException("", wae);
+      String message = "Det gick inte att hämta driftavbrott för kanalerna " + kanaler + " (url = " + url + "). Statuskod " + wae.getResponse().getStatus();
+      log.error(message, wae);
+      throw new WebServiceException("", wae);
     }
     catch(Throwable t) {
       // Hantera okänt fel
