@@ -7,6 +7,7 @@
     <release version="2.3.0" date="2018-MM-DD">
       <action>Uppgradera till mdh-parent:30.</action>
       <action>Deklarera beroende på javax.xml.ws:jaxws-api.</action>
+      <action>Uppdatera beroende till mdh-driftavbrott-modell:1.3.0.</action>
     </release>
     <release version="2.2.0" date="2018-09-25">
       <action>Hantering för marginal</action>
