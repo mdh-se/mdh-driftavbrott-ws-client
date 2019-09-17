@@ -4,6 +4,9 @@
     <title>Ändringar</title>
   </properties>
   <body>
+    <release version="2.3.1" date="2019-MM-DD">
+      <action>Uppgradera till mdh-parent:32.</action>
+    </release>
     <release version="2.3.0" date="2019-02-20">
       <action>Uppgradera till mdh-parent:31.</action>
       <action>Deklarera beroende på javax.xml.ws:jaxws-api.</action>
